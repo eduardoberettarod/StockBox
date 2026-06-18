@@ -3,26 +3,20 @@ import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
   title: {
-    fontSize: 32,
+    fontSize: 28,
     color: colors.white,
     fontWeight: 700
   },
-  subtitle: {
-    fontSize: 24,
-    color: colors.gray[300],
-    fontWeight: 700
-  },
-  container: {
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    gap: 8
   },
-  button: {
-    backgroundColor: colors.translucent,
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+  subtitle: {
+    fontSize: 14,
+    color: colors.gray[500],
+  },
+  container: {
+    gap: 6
+  },
 });

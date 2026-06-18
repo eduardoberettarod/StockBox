@@ -1,6 +1,6 @@
 import { View, Text, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { styles } from "@/components/Input/style";
+import { styles } from "./style";
 
 //components
 import Input from "@/components/Input";
@@ -11,11 +11,15 @@ export default function Index() {
   const insets = useSafeAreaInsets()
 
   return (
-    <View style={{ flex: 1, paddingHorizontal: 16 }}>
-      <View style={{ paddingTop: insets.top + 10}}>
+    <View style={styles.container}>
+      <View style={{ paddingTop: insets.top + 10 }}>
         <Header />
       </View>
-      <Input />
+      
+      <View style={styles.input}>
+        <Input />
+      </View>
+      
     </View>
   )
 }

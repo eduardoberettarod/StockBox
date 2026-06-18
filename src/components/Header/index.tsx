@@ -1,21 +1,21 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { styles } from './style'
-import { FontAwesome6 } from '@expo/vector-icons';
+import { colors } from '@/theme/colors';
+
+import { AntDesign } from '@expo/vector-icons';
 
 export default function Header() {
 
   return (
     <View style={styles.container}>
 
-      <View>
-        <Text style={styles.title}>Stock</Text>
-        <Text style={styles.subtitle}>Box</Text>
+      <View style={styles.header}>
+        <AntDesign name="codepen" size={24} color={colors.white} />
+        <Text style={styles.title}>StockBox</Text>
       </View>
 
       <View>
-        <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-          <FontAwesome6 name="bell" size={24} color="white" />
-        </TouchableOpacity>
+        <Text style={styles.subtitle}>Gerenciamento de estoque de produtos.</Text>
       </View>
 
     </View>

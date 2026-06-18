@@ -14,10 +14,17 @@ export const styles = StyleSheet.create({
     letterSpacing: -0.1,
   },
   inputContainer: {
-    height: 50, // Altura padrão do iOS de extrema ergonomia para toque
-    borderRadius: 50, // Cantos arredondados premium (Squircle standard)
+    height: 50,
+    borderRadius: 50,
     overflow: 'hidden',
     borderWidth: 1,
+    borderColor: colors.translucent,
+    backgroundColor: 'rgba(255,255,255,0.05)',
+    shadowColor: colors.white,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3.5,
+    elevation: 4,
   },
   blurView: {
     flex: 1,
