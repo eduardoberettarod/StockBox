@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: colors.blue[500],
+    backgroundColor: colors.black,
     paddingTop: 72,
     paddingBottom: 16,
     paddingHorizontal: 16,
