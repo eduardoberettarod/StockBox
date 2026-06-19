@@ -3,22 +3,26 @@ import { Feather } from '@expo/vector-icons'
 import { colors } from '@/theme/colors'
 import { styles } from './style'
 
-type CardProps = TouchableOpacityProps & {
+export type CardProps = {
   id: string,
   name: string,
   quantity: number
   price: number
-  imageUrl: string
+  imageUrl: string,
 }
 
-type Props = {
-  data: CardProps
+type Props = TouchableOpacityProps & {
+  data: CardProps,
 }
 
 
-export default function Card({ data }: Props) {
+export default function Card({ data, ...rest }: Props) {
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.8} key={data.id}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.8}
+      {...rest}
+    >
       <Image
         source={{ uri: `${data.imageUrl}` }}
         style={styles.image}
@@ -33,6 +37,7 @@ export default function Card({ data }: Props) {
         <Text style={styles.price}>R$ {data.price}</Text>
         <Feather name='chevron-right' size={18} color={colors.gray[400]} />
       </View>
+
     </TouchableOpacity>
   )
 }

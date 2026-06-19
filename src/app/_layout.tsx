@@ -3,9 +3,9 @@ import { colors } from "@/theme/colors";
 
 export default function Layout() {
   return (
-    <Stack screenOptions={{
-      headerShown: false,
-      contentStyle: { backgroundColor: colors.black }
-    }} />
+      <Stack screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: colors.black }
+      }} />
   )
 }

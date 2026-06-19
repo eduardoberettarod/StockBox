@@ -1,21 +1,28 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import { styles } from './style'
-import { colors } from '@/theme/colors';
+import { router } from 'expo-router'
 
-import { AntDesign } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur'
+import { Feather } from '@expo/vector-icons'
+
+import { styles } from './style'
+import { colors } from '@/theme/colors'
 
 export default function Header() {
-
   return (
     <View style={styles.container}>
 
-      <View style={styles.header}>
-        <AntDesign name="codepen" size={24} color={colors.white} />
-        <Text style={styles.title}>StockBox</Text>
-      </View>
+      <View style={styles.left}>
+        <TouchableOpacity style={styles.button}
+          onPress={() => router.back()}
+        >
+          <BlurView style={styles.blur}>
+            <Feather name='chevron-left' color={colors.white} size={28} />
+          </BlurView>
+        </TouchableOpacity>
 
-      <View>
-        <Text style={styles.subtitle}>Gerenciamento de estoque de produtos.</Text>
+        <Text style={styles.text}>
+          Novo Produto
+        </Text>
       </View>
 
     </View>

@@ -3,20 +3,19 @@ import {
   TextInput,
   TextInputProps,
   Text,
-  View,
-  Animated,
+  View
 } from 'react-native'
 import { BlurView } from 'expo-blur'
 import { Feather } from '@expo/vector-icons'
 import { colors } from '@/theme/colors'
 import { styles } from './style'
 
-type InputProps = TextInputProps & {
+type SearchProps = TextInputProps & {
   label?: string
   iconName?: keyof typeof Feather.glyphMap | string // Flexibilidade para trocar o ícone se necessário
 }
 
-export default function Input({ label, iconName = 'search', ...rest }: InputProps) {
+export default function Search({ label, iconName = 'search', ...rest }: SearchProps) {
 
   return (
     <View style={styles.container}>

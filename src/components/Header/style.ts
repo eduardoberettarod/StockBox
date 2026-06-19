@@ -2,21 +2,38 @@ import { StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
-  title: {
-    fontSize: 28,
-    color: colors.white,
-    fontWeight: 700
-  },
-  header: {
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colors.blue[500],
+    paddingTop: 72,
+    paddingBottom: 16,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8
+    justifyContent: 'space-between'
   },
-  subtitle: {
-    fontSize: 14,
-    color: colors.gray[500],
+  button: {
+    overflow: 'hidden',
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: colors.white
   },
-  container: {
-    gap: 6
+  blur: {
+    padding: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  left: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 18
+  },
+  text: {
+    color: colors.white,
+    fontWeight: 700,
+    fontSize: 20
+  }
 });

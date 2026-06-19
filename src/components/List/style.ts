@@ -6,17 +6,12 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   listContent: {
-    gap: 16,
     paddingTop: 16,
     paddingBottom: 72
   },
   title: {
-    marginTop: 24,
-    paddingBottom: 16,
     fontSize: 18,
-    color: colors.black,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray[300]
+    color: colors.white,
   },
   empty: {
     fontSize: 14,
@@ -24,5 +19,20 @@ export const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     paddingTop: 24
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 18
+  },
+  textButton: {
+    color: colors.white,
+    fontSize: 14
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   }
 })

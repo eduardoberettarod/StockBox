@@ -6,11 +6,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
   image: {
-    width: 44,
-    height: 44,
+    width: 55,
+    height: 55,
     objectFit: 'cover',
     borderRadius: 8,
   },
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   productName: {
     fontSize: 14,
     fontWeight: '600',
-    color: colors.gray[900],
+    color: colors.white,
   },
   quantity: {
     fontSize: 13,
@@ -37,6 +37,6 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: 14,
     fontWeight: '700',
-    color: colors.gray[900],
+    color: colors.gray[500],
   },
 });
