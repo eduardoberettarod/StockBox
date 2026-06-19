@@ -7,7 +7,11 @@ import { Feather } from '@expo/vector-icons'
 import { styles } from './style'
 import { colors } from '@/theme/colors'
 
-export default function Header() {
+type HeaderProps = {
+  title: string
+}
+
+export default function Header({ title }: HeaderProps) {
   return (
     <View style={styles.container}>
 
@@ -21,7 +25,7 @@ export default function Header() {
         </TouchableOpacity>
 
         <Text style={styles.text}>
-          Novo Produto
+          {title}
         </Text>
       </View>
 
