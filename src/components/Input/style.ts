@@ -19,6 +19,10 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.gray[900],
     borderWidth: 1,
     borderColor: colors.gray[800],
-    padding: 15
+    padding: 15,
+  },
+  textarea: {
+    minHeight: 120,
+    paddingTop: 15,
   }
 });
