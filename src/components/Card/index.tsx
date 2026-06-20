@@ -1,4 +1,5 @@
-import { View, Text, Image, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import { Image } from 'expo-image'
 import { Feather } from '@expo/vector-icons'
 import { colors } from '@/theme/colors'
 import { styles } from './style'
@@ -17,6 +18,7 @@ type Props = TouchableOpacityProps & {
 
 
 export default function Card({ data, ...rest }: Props) {
+
   return (
     <TouchableOpacity
       style={styles.container}
@@ -26,6 +28,7 @@ export default function Card({ data, ...rest }: Props) {
       <Image
         source={{ uri: `${data.imageUrl}` }}
         style={styles.image}
+        contentFit="cover"
       />
 
       <View style={styles.infoContainer}>
