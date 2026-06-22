@@ -1,8 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { View, Text, ScrollView, Alert } from "react-native";
+import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { Image } from "expo-image";
+import { useState, useCallback } from "react";
 import { styles } from './style'
 import { colors } from "@/theme/colors";
+import { useStockBoxDatabase } from "@/database/useStockBoxDatabase";
+import { StockBoxResponse } from "@/database/useStockBoxDatabase";
 
 //components
 import Header from "@/components/Header";
@@ -13,6 +16,26 @@ import Button from "@/components/Button";
 export default function InProgress() {
 
   const params = useLocalSearchParams<{ id: string }>()
+  const stockBoxDatabase = useStockBoxDatabase()
+  const [product, setProduct] = useState<StockBoxResponse | null>(null)
+
+  async function loadProduct() {
+    try {
+      if (params.id) {
+        const data = await stockBoxDatabase.getById(Number(params.id))
+        setProduct(data)
+      }
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao carregar o produto.")
+      console.log(error)
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => { loadProduct() }, [params.id])
+  )
+
+  const totalValue = product ? product.quantity * product.price : 0
 
   return (
     <View style={{ flex: 1 }}>
@@ -25,20 +48,20 @@ export default function InProgress() {
         <View style={styles.containerImage}>
           <Image
             style={styles.image}
-            source={{ uri: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400" }}
+            source={{ uri: product?.imageUrl || "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400" }}
             contentFit="cover"
           />
         </View>
 
         <View style={{ paddingTop: 24 }}>
-          <Text style={styles.title}>Nome do Produto</Text>
+          <Text style={styles.title}>{product?.name || "Carregando..."}</Text>
 
           <Separator color={colors.gray[900]} />
 
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingTop: 18 }}>
             <Info
               title="Em estoque"
-              value={12}
+              value={product?.quantity || 0}
               subtitle="unidades"
               icon={{
                 iconName: 'box',
@@ -47,7 +70,7 @@ export default function InProgress() {
             />
             <Info
               title="Valor Unitário"
-              value={450}
+              value={product?.price || 0}
               subtitle="R$"
               price={true}
               icon={{
@@ -60,7 +83,7 @@ export default function InProgress() {
           <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: 18 }}>
             <Info
               title="Valor Total"
-              value={450}
+              value={totalValue}
               subtitle="R$"
               price={true}
               icon={{
@@ -73,7 +96,7 @@ export default function InProgress() {
 
           <View style={{ paddingVertical: 24 }}>
             <Text style={styles.description}>Descrição</Text>
-            <Text style={styles.text}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi neque odio impedit molestiae iusto ab eveniet voluptates accusantium voluptatum? Impedit odio officiis maiores magni voluptatibus fugit, accusantium debitis tempora eum.</Text>
+            <Text style={styles.text}>{product?.description || "Sem descrição"}</Text>
           </View>
 
         </View>
@@ -87,6 +110,7 @@ export default function InProgress() {
               flex: 1
             }}
             activeOpacity={0.8}
+            onPress={() => router.navigate(`/add?id=${params.id}`)}
             />
 
           <Button

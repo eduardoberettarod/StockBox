@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Alert } from 'react-native'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useFocusEffect } from 'expo-router'
 import { styles } from './style'
 import { colors } from '@/theme/colors'
 
@@ -11,7 +12,7 @@ import Input from '@/components/Input'
 import CurrencyInput from '@/components/InputCurrecy'
 import Button from '@/components/Button'
 import { router, useLocalSearchParams } from 'expo-router'
-import { useStockBoxDatabase } from '@/database/useStockBoxDatabase'
+import { useStockBoxDatabase, StockBoxResponse } from '@/database/useStockBoxDatabase'
 
 export default function Add() {
   const [productName, setProductName] = useState('')
@@ -19,9 +20,38 @@ export default function Add() {
   const [quantity, setQuantity] = useState<number | null>(0)
   const [image, setImage] = useState('')
   const [value, setValue] = useState<number | null>(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   const params = useLocalSearchParams<{ id?: string }>()
   const stockBoxDatabase = useStockBoxDatabase()
+  const isEditing = !!params.id
+
+  async function loadProduct() {
+    if (params.id) {
+      try {
+        setIsLoading(true)
+        const product = await stockBoxDatabase.getById(Number(params.id))
+        if (product) {
+          setProductName(product.name)
+          setDescription(product.description)
+          setQuantity(product.quantity)
+          setValue(product.price)
+          setImage(product.imageUrl)
+        }
+      } catch (error) {
+        Alert.alert("Erro", "Falha ao carregar o produto.")
+        console.log(error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+  }
+
+  useFocusEffect(
+    useCallback(() => { 
+      loadProduct() 
+    }, [params.id])
+  )
 
   function userSave() {
     if (
@@ -36,8 +66,8 @@ export default function Add() {
       return Alert.alert("Atenção!", "Preencha os todos os campos.")
     }
 
-    if (params.id) {
-      //update
+    if (isEditing) {
+      updateData()
     } else {
       saveData()
     }
@@ -63,13 +93,31 @@ export default function Add() {
     }
   }
 
-
+  async function updateData() {
+    try {
+      await stockBoxDatabase.update(Number(params.id), {
+        name: productName,
+        description: description,
+        quantity: Number(quantity),
+        price: Number(value),
+        imageUrl: image
+      })
+      Alert.alert("Sucesso", "Produto atualizado com sucesso.", [
+        {
+          text: "OK", onPress: () => router.back()
+        }
+      ])
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao atualizar o produto.")
+      console.log(error)
+    }
+  }
 
   return (
     <View style={{ flex: 1 }}>
 
       <Header
-        title='Novo Produto'
+        title={isEditing ? 'Editar Produto' : 'Novo Produto'}
       />
 
       <ScrollView style={{ paddingHorizontal: 14, flex: 1, paddingTop: 12 }}>
@@ -116,11 +164,11 @@ export default function Add() {
 
         <View style={{ paddingBottom: 76, marginTop: 24 }}>
           <Button
-            title='SALVAR'
+            title={isEditing ? 'ATUALIZAR' : 'SALVAR'}
             color={colors.white}
             textColor={colors.black}
             icon={{
-              nameIcon: 'save',
+              nameIcon: isEditing ? 'edit' : 'save',
               colorIcon: colors.black,
               sizeIcon: 16
             }}
