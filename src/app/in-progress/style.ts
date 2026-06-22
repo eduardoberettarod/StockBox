@@ -3,7 +3,7 @@ import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   image: {
     width: '100%',
@@ -21,5 +21,18 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: 700,
     marginBottom: 18
+  },
+  description: {
+    fontSize: 14,
+    color: colors.gray[400],
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 18
+  },
+  text: {
+    fontSize: 16,
+    color: colors.gray[400],
+    textAlign: 'left',
+    lineHeight: 24
   }
 });

@@ -1,5 +1,6 @@
 import {
-  View,
+  StyleProp,
+  ViewStyle,
   Text,
   TouchableOpacity,
   TouchableOpacityProps
@@ -8,8 +9,10 @@ import { styles } from './style'
 import { Feather } from '@expo/vector-icons'
 
 type ButtonProps = TouchableOpacityProps & {
-  title: string,
+  title?: string,
   color: string,
+  textColor: string,
+  style?: StyleProp<ViewStyle>,
   icon?: {
     nameIcon: keyof typeof Feather.glyphMap,
     sizeIcon: number,
@@ -17,14 +20,36 @@ type ButtonProps = TouchableOpacityProps & {
   }
 }
 
-export default function Button({ title, color, icon, ...rest }: ButtonProps) {
+export default function Button({
+  title,
+  color,
+  icon,
+  textColor,
+  style,
+  ...rest
+}: ButtonProps) {
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: color }]}
+      style={[
+        styles.container,
+        { backgroundColor: color },
+        style
+      ]}
       {...rest}
     >
-      <Feather name={icon?.nameIcon} size={icon?.sizeIcon} color={icon?.colorIcon} />
-      <Text style={styles.text}>{title}</Text>
+      {icon && (
+        <Feather
+          name={icon.nameIcon}
+          size={icon.sizeIcon}
+          color={icon.colorIcon}
+        />
+      )}
+
+      {title && (
+        <Text style={[styles.text, { color: textColor }]}>
+          {title}
+        </Text>
+      )}
     </TouchableOpacity>
   )
 }

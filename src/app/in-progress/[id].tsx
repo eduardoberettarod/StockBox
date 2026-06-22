@@ -8,6 +8,7 @@ import { colors } from "@/theme/colors";
 import Header from "@/components/Header";
 import Info from "@/components/Info";
 import Separator from "@/components/Separator";
+import Button from "@/components/Button";
 
 export default function InProgress() {
 
@@ -55,7 +56,8 @@ export default function InProgress() {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 10 }}>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', paddingTop: 10, paddingBottom: 18 }}>
             <Info
               title="Valor Total"
               value={450}
@@ -69,10 +71,37 @@ export default function InProgress() {
           </View>
           <Separator color={colors.gray[900]} />
 
-          <View>
-              <Text>Descrição do Produto</Text>
+          <View style={{ paddingVertical: 24 }}>
+            <Text style={styles.description}>Descrição</Text>
+            <Text style={styles.text}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi neque odio impedit molestiae iusto ab eveniet voluptates accusantium voluptatum? Impedit odio officiis maiores magni voluptatibus fugit, accusantium debitis tempora eum.</Text>
           </View>
 
+        </View>
+
+        <View style={{ alignItems: 'center', flexDirection: 'row', gap: 12, paddingBottom: 48 }}>
+          <Button
+            title="Editar"
+            textColor={colors.black}
+            color={colors.white}
+            style={{
+              flex: 1
+            }}
+            activeOpacity={0.8}
+            />
+
+          <Button
+            icon={{
+              nameIcon: 'trash',
+              sizeIcon: 18,
+              colorIcon: colors.white
+            }}
+            textColor={colors.white}
+            color={colors.red[500]}
+            style={{
+              width: 60,
+            }}
+            activeOpacity={0.8}
+          />
         </View>
 
 

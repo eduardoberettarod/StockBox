@@ -54,16 +54,20 @@ export default function Add() {
           textarea
         />
 
-        <View style={{ paddingBottom: 76 }}>
+        <View style={{ paddingBottom: 76, marginTop: 24 }}>
           <Button
             title='SALVAR'
             color={colors.white}
+            textColor={colors.black}
             icon={{
               nameIcon: 'save',
               colorIcon: colors.black,
               sizeIcon: 16
             }}
             activeOpacity={0.8}
+            style={{
+              flex: 1
+            }}
           />
         </View>
 

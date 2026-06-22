@@ -3,8 +3,6 @@ import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 24,
     padding: 18,
     justifyContent: 'center',
     alignItems: 'center',
@@ -18,7 +16,7 @@ export const styles = StyleSheet.create({
     elevation: 4,
   },
   text: {
-    fontSize: 14,
-    fontWeight: 700,
+    fontSize: 18,
+    fontWeight: 600,
   }
 });
