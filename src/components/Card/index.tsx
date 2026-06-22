@@ -7,13 +7,14 @@ import { styles } from './style'
 export type CardProps = {
   id: string,
   name: string,
-  quantity: number
-  price: number
+  quantity: number,
+  price: number,
   imageUrl: string,
+  description: string
 }
 
 type Props = TouchableOpacityProps & {
-  data: CardProps,
+  data: CardProps
 }
 
 

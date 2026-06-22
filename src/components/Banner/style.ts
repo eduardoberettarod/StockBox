@@ -3,12 +3,14 @@ import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    width: '100%',
     gap: 8,
-    backgroundColor: colors.gray[900],
-    height: 350,
-    justifyContent: 'center',
     marginTop: 14,
+    height: 350,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    backgroundColor: colors.gray[900],
     borderRadius: 18,
     borderWidth: 1,
     borderColor: colors.gray[800]
@@ -17,5 +19,13 @@ export const styles = StyleSheet.create({
     color: colors.gray[700],
     fontSize: 14,
     fontWeight: 500
+  },
+  placeholder: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  image: {
+    width: '100%',
+    height: '100%'
   }
 });
