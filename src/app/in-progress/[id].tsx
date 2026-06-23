@@ -37,6 +37,8 @@ export default function InProgress() {
 
   const totalValue = product ? product.quantity * product.price : 0
 
+
+
   return (
     <View style={{ flex: 1 }}>
       <Header
@@ -48,7 +50,7 @@ export default function InProgress() {
         <View style={styles.containerImage}>
           <Image
             style={styles.image}
-            source={{ uri: product?.imageUrl || "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400" }}
+            source={{ uri: product?.imageUrl }}
             contentFit="cover"
           />
         </View>
@@ -111,7 +113,7 @@ export default function InProgress() {
             }}
             activeOpacity={0.8}
             onPress={() => router.navigate(`/add?id=${params.id}`)}
-            />
+          />
 
           <Button
             icon={{

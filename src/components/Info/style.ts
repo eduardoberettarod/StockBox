@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     marginBottom: 4
   },
   value: {
-    fontSize: 32,
+    fontSize: 28,
     color: colors.gray[100],
     fontWeight: 700
   },
@@ -30,6 +30,6 @@ export const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     alignItems: 'flex-end',
-    gap: 12
+    gap: 10
   }
 });

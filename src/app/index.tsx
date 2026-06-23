@@ -1,5 +1,5 @@
 import { View, Text, Alert } from "react-native";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useFocusEffect } from "expo-router";
 import { styles } from "./style";
@@ -17,6 +17,8 @@ export default function Index() {
   const insets = useSafeAreaInsets()
   const stockBoxDatabase = useStockBoxDatabase()
   const [products, setProducts] = useState<CardProps[]>([])
+
+  const [searchQuery, setSearchQuery] = useState("")
 
   async function fetchProducts(): Promise<CardProps[]> {
     try {
@@ -37,6 +39,12 @@ export default function Index() {
     }
   }
 
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery, products]);
+
   async function fetchData() {
     const stockBoxPromise = await fetchProducts()
     const [stockBoxData] = await Promise.all([stockBoxPromise])
@@ -55,7 +63,10 @@ export default function Index() {
       </View>
 
       <View style={styles.input}>
-        <Search />
+        <Search 
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        />
       </View>
 
       <View style={{ flex: 1 }}>
@@ -68,7 +79,7 @@ export default function Index() {
             iconColor: colors.white,
             iconSize: 16
           }}
-          data={products}
+          data={filteredProducts}
           renderItem={({ item }) =>
             <Card
               data={item}

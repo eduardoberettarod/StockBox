@@ -14,7 +14,14 @@ type InfoProps = {
   }
 }
 
+
 export default function Info({ title, subtitle, value, icon, price = false }: InfoProps) {
+
+  const valueFormat = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value);
+
   return (
     <View style={styles.container}>
       <Feather name={icon.iconName} size={24} color={icon.iconColor} />
@@ -26,9 +33,9 @@ export default function Info({ title, subtitle, value, icon, price = false }: In
             <Text style={styles.subtitle}>{subtitle}</Text>
           </View>
         ) : (
-          <View style={[styles.footer, {gap: 6}]}>
+          <View style={[styles.footer, { gap: 6 }]}>
             <Text style={styles.subtitle}>{subtitle}</Text>
-            <Text style={styles.value}>{value}</Text>
+            <Text style={styles.value}>{valueFormat}</Text>
           </View>
         )}
       </View>
