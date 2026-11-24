@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 3.5,
-    elevation: 4,
+    elevation: 1.5,
   },
   blurView: {
     flex: 1,

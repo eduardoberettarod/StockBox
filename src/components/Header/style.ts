@@ -17,14 +17,14 @@ export const styles = StyleSheet.create({
   },
   button: {
     overflow: 'hidden',
-    borderRadius: 50,
+    borderRadius: 44,
     borderWidth: 1,
-    borderColor: colors.white
+    borderColor: colors.gray[700]
   },
   blur: {
-    padding: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 16
   },
   left: {
     alignItems: 'center',
