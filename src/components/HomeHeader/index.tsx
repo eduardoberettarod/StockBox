@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { styles } from './style'
 import { colors } from '@/theme/colors';
 
-import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 export default function HomeHeader() {
 
@@ -10,7 +10,7 @@ export default function HomeHeader() {
     <View style={styles.container}>
 
       <View style={styles.header}>
-        <AntDesign name="codepen" size={24} color={colors.white} />
+        <Feather name="codepen" size={24} color={colors.white} />
         <Text style={styles.title}>StockBox</Text>
       </View>
 

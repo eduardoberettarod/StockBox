@@ -21,6 +21,7 @@ export default function Layout() {
         <View style={{ flex: 1, backgroundColor: colors.black }}>
           <Stack screenOptions={{
             headerShown: false,
+            statusBarHidden: true,
             contentStyle: { backgroundColor: colors.black }
           }} />
         </View>

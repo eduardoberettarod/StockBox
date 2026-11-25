@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1
   },
   listContent: {
-    paddingTop: 16,
     paddingBottom: 72
   },
   title: {
@@ -24,7 +23,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingBottom: 18
+    marginTop: 48
   },
   textButton: {
     color: colors.white,

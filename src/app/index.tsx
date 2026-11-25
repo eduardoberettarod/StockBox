@@ -67,7 +67,9 @@ export default function Index() {
   );
 
   return (
-   <View style={{ flex: 1, paddingTop: insets.top }}>
+    <View style={{ flex: 1, paddingTop: insets.top + 20, paddingHorizontal: 12 }}>
+      <HomeHeader />
+
       <List
         title="Inventário"
         button="Produto"
@@ -77,15 +79,10 @@ export default function Index() {
         renderItem={({ item }) => (
           <Card data={item} onPress={() => router.navigate(`/in-progress/${item.id}`)} />
         )}
-        containerStyle={{ paddingHorizontal: 12 }}
         ListHeaderComponent={
-          <>
-            <HomeHeader />
-
-            <View style={styles.input}>
-              <Search value={searchQuery} onChangeText={setSearchQuery} />
-            </View>
-          </>
+          <View style={styles.input}>
+            <Search value={searchQuery} onChangeText={setSearchQuery} />
+          </View>
         }
       />
     </View>

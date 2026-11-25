@@ -20,13 +20,17 @@ export default function Search({ label, iconName = 'search', ...rest }: SearchPr
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      
+
       <View style={styles.inputContainer}>
-        <BlurView intensity={45} tint="dark" style={styles.blurView}>
-          <Feather 
-            name={iconName as any} 
-            size={18} 
-            color={colors.white} 
+        <BlurView
+          intensity={80}
+          tint="dark"
+          style={styles.blurView}
+        >
+          <Feather
+            name={iconName as any}
+            size={18}
+            color={colors.white}
             style={styles.icon}
           />
           <TextInput
