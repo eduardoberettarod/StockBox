@@ -9,6 +9,7 @@ import { colors } from "@/theme/colors";
 
 //components
 import Loading from "@/components/Loading";
+import TabBar from "@/components/TabBar";
 
 export default function Layout() {
   return (
@@ -24,6 +25,7 @@ export default function Layout() {
             statusBarHidden: true,
             contentStyle: { backgroundColor: colors.black }
           }} />
+          <TabBar />
         </View>
       </SQLiteProvider>
     </Suspense>

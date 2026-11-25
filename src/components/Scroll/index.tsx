@@ -43,6 +43,7 @@ export default function Scroll({
             flexGrow: 1,
             paddingTop: insets.top + 10,
             paddingBottom,
+            paddingHorizontal: 16
           },
         ]}
       >
@@ -70,7 +71,7 @@ export default function Scroll({
             right: 0,
             zIndex: 999,
             elevation: 10,
-            paddingHorizontal: 18
+            paddingHorizontal: 16
           }}
         >
           {overlay}

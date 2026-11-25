@@ -1,4 +1,4 @@
-import { View, Alert } from "react-native";
+import { View, Alert, Text } from "react-native";
 
 import { useState, useCallback, useMemo } from "react";
 
@@ -17,6 +17,7 @@ import Card, { CardProps } from "@/components/Card";
 import List from "@/components/List";
 
 import { useStockBoxDatabase } from "@/database/useStockBoxDatabase";
+import Scroll from "@/components/Scroll";
 
 export default function Index() {
   const insets = useSafeAreaInsets();
@@ -67,24 +68,8 @@ export default function Index() {
   );
 
   return (
-    <View style={{ flex: 1, paddingTop: insets.top + 20, paddingHorizontal: 12 }}>
+    <Scroll>
       <HomeHeader />
-
-      <List
-        title="Inventário"
-        button="Produto"
-        onAdd={() => router.navigate("/add")}
-        icon={{ iconName: "plus", iconColor: colors.white, iconSize: 16 }}
-        data={filteredProducts}
-        renderItem={({ item }) => (
-          <Card data={item} onPress={() => router.navigate(`/in-progress/${item.id}`)} />
-        )}
-        ListHeaderComponent={
-          <View style={styles.input}>
-            <Search value={searchQuery} onChangeText={setSearchQuery} />
-          </View>
-        }
-      />
-    </View>
+    </Scroll>
   );
 }
