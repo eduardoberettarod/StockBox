@@ -164,14 +164,9 @@ export default function Add() {
 
         <View style={{ paddingBottom: 76, marginTop: 24 }}>
           <Button
-            title={isEditing ? 'ATUALIZAR' : 'SALVAR'}
-            color={colors.white}
-            textColor={colors.black}
-            icon={{
-              nameIcon: isEditing ? 'edit' : 'save',
-              colorIcon: colors.black,
-              sizeIcon: 16
-            }}
+            title={isEditing ? 'Atualizar' : 'Salvar'}
+            color={colors.gray[200]}
+            textColor={colors.onyx}
             activeOpacity={0.8}
             style={{
               flex: 1

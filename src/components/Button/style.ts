@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    borderRadius: 12,
+    borderRadius: 999,
     gap: 8,
     shadowColor: colors.white,
     shadowOffset: { width: 0, height: 3 },
@@ -17,6 +17,5 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    fontWeight: 600,
   }
 });

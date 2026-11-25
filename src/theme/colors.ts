@@ -101,4 +101,5 @@ export const colors = {
   white: "#fafaf7",
   translucent: "rgba(238, 238, 238, 0.3)",
   black: "#0e0d0d",
+  onyx: "#111111"
 };

@@ -13,17 +13,11 @@ type ButtonProps = TouchableOpacityProps & {
   color: string,
   textColor: string,
   style?: StyleProp<ViewStyle>,
-  icon?: {
-    nameIcon: keyof typeof Feather.glyphMap,
-    sizeIcon: number,
-    colorIcon: string
-  }
 }
 
 export default function Button({
   title,
   color,
-  icon,
   textColor,
   style,
   ...rest
@@ -37,19 +31,9 @@ export default function Button({
       ]}
       {...rest}
     >
-      {icon && (
-        <Feather
-          name={icon.nameIcon}
-          size={icon.sizeIcon}
-          color={icon.colorIcon}
-        />
-      )}
-
-      {title && (
-        <Text style={[styles.text, { color: textColor }]}>
-          {title}
-        </Text>
-      )}
+      <Text style={[styles.text, { color: textColor }]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   )
 }
