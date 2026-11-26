@@ -10,7 +10,7 @@ export default function HomeHeader() {
     <View style={styles.container}>
 
       <View style={styles.header}>
-        <Feather name="codepen" size={24} color={colors.white} />
+        <Feather name="box" size={24} color={colors.orange[600]} />
         <Text style={styles.title}>StockBox</Text>
       </View>
 

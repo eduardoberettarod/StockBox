@@ -1,75 +1,78 @@
-import { View, Alert, Text } from "react-native";
-
+import { View, Alert } from "react-native";
 import { useState, useCallback, useMemo } from "react";
+import { useFocusEffect } from "expo-router";
 
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-import { router, useFocusEffect } from "expo-router";
-
-import { styles } from "./style";
-
-import { colors } from "@/theme/colors";
+import { StockBoxResponse, useStockBoxDatabase } from "@/database/useStockBoxDatabase";
+import { buildSummary, formatBRL, formatNumber } from "@/utils/stock";
 
 // components
-import HomeHeader from "@/components/HomeHeader";
-import Search from "@/components/Search";
-import Card, { CardProps } from "@/components/Card";
-import List from "@/components/List";
-
-import { useStockBoxDatabase } from "@/database/useStockBoxDatabase";
 import Scroll from "@/components/Scroll";
+import HomeHeader from "@/components/HomeHeader";
+import StatCard from "@/components/StatCard";
+import DistributionPie from "@/components/DistributionPie";
+import LargeCard from "@/components/LargeCard";
+import { colors } from "@/theme/colors";
+
 
 export default function Index() {
-  const insets = useSafeAreaInsets();
-
   const stockBoxDatabase = useStockBoxDatabase();
-
-  const [products, setProducts] = useState<CardProps[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  async function fetchProducts(): Promise<CardProps[]> {
-    try {
-      const response = await stockBoxDatabase.listBySavedValue();
-
-      console.log(response);
-
-      return response.map((item) => ({
-        id: String(item.id),
-        name: item.name,
-        description: item.description,
-        quantity: item.quantity,
-        price: item.price,
-        imageUrl: item.imageUrl,
-      }));
-    } catch (error) {
-      Alert.alert("Erro", "Falha ao carregar os produtos.");
-      console.log(error);
-
-      return [];
-    }
-  }
-
-  const fetchData = async () => {
-    const stockBoxData = await fetchProducts();
-
-    setProducts(stockBoxData);
-  };
-
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, products]);
+  const [products, setProducts] = useState<StockBoxResponse[]>([]);
 
   useFocusEffect(
     useCallback(() => {
-      fetchData();
+      (async () => {
+        try {
+          setProducts(await stockBoxDatabase.listBySavedValue());
+        } catch (error) {
+          Alert.alert("Erro", "Falha ao carregar os produtos.");
+          console.log(error);
+        }
+      })();
     }, [])
   );
+
+  const summary = useMemo(() => buildSummary(products), [products]);
 
   return (
     <Scroll>
       <HomeHeader />
+
+      <View style={{ gap: 12, marginTop: 24 }}>
+        <View style={{ flexDirection: "row" }}>
+          <LargeCard
+            title="Valor total do estoque"
+            value={formatBRL(summary.totalValue)}
+            description="Valor estimado dos produtos armazenados."
+          />
+        </View>
+
+        <View style={{ flexDirection: "row", gap: 12 }}>
+          <StatCard
+            icon={{
+              iconName: "layers",
+              iconColor: colors.orange[600]
+            }}
+            title="Itens em estoque"
+            measure="un"
+            value={formatNumber(summary.totalItems)}
+            backgroundColor={colors.onyx}
+            borderColor={colors.gray[700]}
+          />
+          <StatCard
+            icon={{
+              iconName: "package",
+              iconColor: colors.onyx
+            }}
+            title="Produtos cadastrados"
+            measure="SKUs"
+            value={String(summary.totalProducts)}
+            backgroundColor={colors.orange[600]}
+            borderColor={colors.orange[700]}
+          />
+        </View>
+
+        <DistributionPie slices={summary.slices} />
+      </View>
     </Scroll>
   );
 }

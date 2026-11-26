@@ -116,11 +116,6 @@ export default function InProgress() {
           />
 
           <Button
-            icon={{
-              nameIcon: 'trash',
-              sizeIcon: 18,
-              colorIcon: colors.white
-            }}
             textColor={colors.white}
             color={colors.red[500]}
             style={{

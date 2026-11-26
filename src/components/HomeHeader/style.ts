@@ -1,11 +1,12 @@
 import { StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
+import { fonts } from "@/theme/fonts";
 
 export const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     color: colors.white,
-    fontWeight: 700
+    fontFamily: fonts.bold,
   },
   header: {
     flexDirection: 'row',
@@ -14,7 +15,8 @@ export const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: colors.gray[500],
+    color: colors.gray[400],
+    fontFamily: fonts.regular
   },
   container: {
     gap: 6
