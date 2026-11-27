@@ -56,7 +56,9 @@ export default function Index() {
             measure="un"
             value={formatNumber(summary.totalItems)}
             backgroundColor={colors.onyx}
-            borderColor={colors.gray[700]}
+            borderColor={colors.orange[800]}
+            useGradient
+            borderColorCard={colors.orange[600]}
           />
           <StatCard
             icon={{
@@ -68,6 +70,7 @@ export default function Index() {
             value={String(summary.totalProducts)}
             backgroundColor={colors.orange[600]}
             borderColor={colors.orange[700]}
+            borderColorCard={colors.gray[700]}
           />
         </View>
 

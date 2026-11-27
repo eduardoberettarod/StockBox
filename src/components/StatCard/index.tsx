@@ -1,6 +1,6 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { colors } from "@/theme/colors";
+import Gradient from "@/components/Gradient";
 import { styles } from "./style";
 
 type Props = {
@@ -12,7 +12,9 @@ type Props = {
     iconColor: string
   }
   backgroundColor: string,
-  borderColor: string
+  borderColor: string,
+  useGradient?: boolean,
+  borderColorCard: string
 };
 
 export default function StatCard({
@@ -21,16 +23,28 @@ export default function StatCard({
   icon,
   backgroundColor,
   borderColor,
-  measure
+  measure,
+  useGradient = false,
+  borderColorCard,
 }: Props) {
   return (
-    <View style={styles.container}>
+    <View style={[
+      styles.container,
+      useGradient && { overflow: "hidden" },
+      { borderColor: borderColorCard }
+    ]}
+    >
+      {useGradient && (
+        <Gradient style={StyleSheet.absoluteFill} />
+      )}
       <View style={[styles.icon, { backgroundColor: backgroundColor, borderColor: borderColor }]}>
         <Feather name={icon?.iconName} size={18} color={icon?.iconColor} />
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} numberOfLines={2}>
+          {title}
+        </Text>
 
         <View
           style={{

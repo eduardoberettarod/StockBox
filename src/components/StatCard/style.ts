@@ -5,9 +5,8 @@ import { fonts } from "@/theme/fonts";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.gray[900],
+    backgroundColor: colors.onyx,
     borderWidth: 1,
-    borderColor: colors.gray[700],
     borderRadius: 24,
     padding: 16,
     gap: 14,
@@ -17,7 +16,9 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   title: {
+    height: 28,
     fontSize: 11,
+    lineHeight: 14,
     fontWeight: "600",
     letterSpacing: 0.6,
     textTransform: "uppercase",
