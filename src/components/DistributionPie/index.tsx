@@ -7,9 +7,9 @@ import { styles } from "./style";
 type Props = { slices: Slice[] };
 
 const MAX_SIZE = 240;
-const STROKE = 26;
-const GAP_DEG = 5; // espaço visível entre as pontas arredondadas dos segmentos
-const MIN_ARC_DEG = 1; // trecho mínimo de arco desenhado em cada fatia
+const STROKE_RATIO = 0.15; // espessura do anel em relação ao tamanho do gráfico
+const GAP_DEG = 5; // espaço visível entre os segmentos
+const MIN_ARC_DEG = 4; // trecho mínimo de arco desenhado em cada fatia (pontas retas precisam de largura visível)
 const START_DEG = -90; // começa no topo e segue no sentido horário
 
 function polar(cx: number, cy: number, r: number, deg: number) {
@@ -38,19 +38,19 @@ export default function DistributionPie({ slices }: Props) {
   }
 
   const size = Math.min(width || MAX_SIZE, MAX_SIZE);
-  const radius = (size - STROKE) / 2;
+  const stroke = size * STROKE_RATIO;
+  const radius = (size - stroke) / 2;
   const center = size / 2;
-  const innerWidth = size - STROKE * 2 - 16;
+  const innerWidth = size - stroke * 2 - 16;
 
   const activeIndex = Math.min(selected, slices.length - 1);
   const active = slices[activeIndex];
   const activeColor = chartColors[activeIndex];
 
-  // Cada ponta arredondada "invade" STROKE/2 do arco; compensamos para os segmentos não se tocarem.
-  const capDeg = ((STROKE / 2) / radius) * (180 / Math.PI);
-  const pad = capDeg + GAP_DEG / 2;
+  // Pontas retas: basta recuar metade do espaço entre os segmentos em cada lado.
+  const pad = GAP_DEG / 2;
 
-  // Cada fatia ganha um tamanho mínimo visível (pontas + espaço + um trecho de arco);
+  // Cada fatia ganha um tamanho mínimo visível (espaço + um trecho de arco);
   // o restante do círculo é dividido proporcionalmente. Assim fatias pequenas nunca
   // ficam por cima das vizinhas, mesmo com <1% do valor.
   const minSpan = 2 * pad + MIN_ARC_DEG;
@@ -87,7 +87,7 @@ export default function DistributionPie({ slices }: Props) {
                     cy={center}
                     r={radius}
                     stroke={chartColors[0]}
-                    strokeWidth={STROKE}
+                    strokeWidth={stroke}
                     fill="none"
                   />
                 ) : (
@@ -96,8 +96,8 @@ export default function DistributionPie({ slices }: Props) {
                       key={a.index}
                       d={a.path}
                       stroke={a.color}
-                      strokeWidth={STROKE}
-                      strokeLinecap="round"
+                      strokeWidth={stroke}
+                      strokeLinecap="butt"
                       fill="none"
                       opacity={a.index === selected ? 1 : 0.55}
                       onPress={() => setSelected(a.index)}
