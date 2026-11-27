@@ -1,4 +1,5 @@
 import { StockBoxResponse } from "@/database/useStockBoxDatabase";
+import { colors } from "@/theme/colors";
 
 export type Slice = { label: string; value: number; percent: number };
 
@@ -41,4 +42,5 @@ export function buildSummary(products: StockBoxResponse[]) {
   return { totalValue, totalItems, totalProducts: products.length, slices };
 }
 
-export const chartColors = ["#3d44cd", "#8DA2EB", "#d8ddfc", "#58585f"];
+// Paleta do app: laranja (destaque), azuis e cinza para "Outros".
+export const chartColors = [colors.orange[600], colors.blue[500], colors.blue[300], colors.gray[600]];
