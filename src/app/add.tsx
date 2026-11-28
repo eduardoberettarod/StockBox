@@ -2,6 +2,8 @@ import { View, Text, ScrollView, Alert } from 'react-native'
 import { useState, useCallback } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useFocusEffect } from 'expo-router'
+import * as ImagePicker from 'expo-image-picker'
+import * as MediaLibrary from 'expo-media-library'
 import { styles } from './style'
 import { colors } from '@/theme/colors'
 
@@ -9,6 +11,7 @@ import { colors } from '@/theme/colors'
 import Header from '@/components/Header'
 import Banner from '@/components/Banner'
 import Input from '@/components/Input'
+import ImageButton from '@/components/ImageButton'
 import CurrencyInput from '@/components/InputCurrecy'
 import Button from '@/components/Button'
 import { router, useLocalSearchParams } from 'expo-router'
@@ -53,6 +56,81 @@ export default function Add() {
       loadProduct()
     }, [params.id])
   )
+
+  // Resolve um endereço de imagem que continue válido depois de fechar o app,
+  // já que o seletor e a câmera devolvem arquivos temporários (cache).
+  async function getDurableUri(asset: ImagePicker.ImagePickerAsset, fromCamera: boolean) {
+    try {
+      // Foto nova: só precisa de permissão para gravar na galeria
+      const permission = await MediaLibrary.requestPermissionsAsync(fromCamera, ['photo'])
+      if (!permission.granted) return asset.uri
+
+      if (fromCamera) {
+        const created = await MediaLibrary.createAssetAsync(asset.uri)
+        try {
+          const info = await MediaLibrary.getAssetInfoAsync(created)
+          return info.localUri ?? created.uri
+        } catch {
+          return created.uri
+        }
+      }
+
+      if (asset.assetId) {
+        const info = await MediaLibrary.getAssetInfoAsync(asset.assetId)
+        return info.localUri ?? asset.uri
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    return asset.uri
+  }
+
+  async function pickFromCamera() {
+    try {
+      const permission = await ImagePicker.requestCameraPermissionsAsync()
+      if (!permission.granted) {
+        return Alert.alert("Permissão necessária", "Permita o acesso à câmera nas configurações para tirar a foto.")
+      }
+
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ['images'],
+        quality: 0.8
+      })
+      if (result.canceled) return
+
+      setImage(await getDurableUri(result.assets[0], true))
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao abrir a câmera.")
+      console.log(error)
+    }
+  }
+
+  async function pickFromGallery() {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        quality: 0.8
+      })
+      if (result.canceled) return
+
+      setImage(await getDurableUri(result.assets[0], false))
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao abrir a galeria.")
+      console.log(error)
+    }
+  }
+
+  function chooseImage() {
+    Alert.alert(
+      "Imagem do produto",
+      "Deseja tirar uma foto ou escolher uma imagem da galeria?",
+      [
+        { text: "Tirar foto", onPress: pickFromCamera },
+        { text: "Galeria", onPress: pickFromGallery },
+        { text: "Cancelar", style: "cancel" }
+      ]
+    )
+  }
 
   function userSave() {
     if (
@@ -126,11 +204,10 @@ export default function Add() {
           background={image}
         />
 
-        <Input
-          label='URL da imagem'
-          placeholder='https://exemplo.com/imagem.png'
-          value={image}
-          onChangeText={setImage}
+        <ImageButton
+          label='Imagem do produto'
+          selected={image.trim().length > 0}
+          onPress={chooseImage}
         />
 
         <Input

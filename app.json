@@ -25,7 +25,24 @@
       "expo-router",
       "expo-sqlite",
       "./plugins/with-android-ndk-path",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O StockBox precisa acessar suas fotos para escolher a imagem do produto.",
+          "cameraPermission": "O StockBox precisa acessar a câmera para tirar a foto do produto."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "O StockBox precisa acessar suas fotos para usar a imagem do produto.",
+          "savePhotosPermission": "O StockBox precisa salvar a foto tirada do produto na sua galeria.",
+          "granularPermissions": [
+            "photo"
+          ]
+        }
+      ]
     ]
   }
 }
