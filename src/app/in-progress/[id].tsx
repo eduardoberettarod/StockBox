@@ -12,6 +12,8 @@ import Header from "@/components/Header";
 import Info from "@/components/Info";
 import Separator from "@/components/Separator";
 import Button from "@/components/Button";
+import Scroll from "@/components/Scroll";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function InProgress() {
 
@@ -36,16 +38,16 @@ export default function InProgress() {
   )
 
   const totalValue = product ? product.quantity * product.price : 0
-
+  const insets = useSafeAreaInsets()
 
 
   return (
-    <View style={{ flex: 1 }}>
+    <Scroll>
       <Header
         title="Detalhes do Item"
       />
 
-      <ScrollView style={styles.container}>
+      <View>
 
         <View style={styles.containerImage}>
           <Image
@@ -127,8 +129,8 @@ export default function InProgress() {
 
 
 
-      </ScrollView>
+      </View>
 
-    </View>
+    </Scroll>
   )
 }

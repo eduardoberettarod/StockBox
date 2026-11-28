@@ -59,7 +59,7 @@ export default function List<T>({
         renderItem={renderItem}
         keyExtractor={(item, index) => (item as any).id || `${index}`}
         contentContainerStyle={styles.listContent}
-        ItemSeparatorComponent={() => <Separator color={colors.gray[500]} />}
+        ItemSeparatorComponent={() => <Separator color={colors.gray[800]} />}
         ListEmptyComponent={() =>
           <View style={{ flexDirection: 'column', alignItems: 'center', gap: 12 }}>
             <Feather name="codepen" color={colors.gray[800]} size={72} />

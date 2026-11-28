@@ -22,14 +22,14 @@ export default function TabBar() {
     return null
   }
 
-  // const isFullScreenPage =
-  //   pathname === '/screen/Register' ||
-  //   pathname === '/screen/About' ||
-  //   (pathname.startsWith('/screen/History/') && pathname !== '/screen/History')
+  const isFullScreenPage =
+    pathname === '/add' ||
+    pathname.startsWith('/in-progress/') ||
+    (pathname.startsWith('/screen/History/') && pathname !== '/screen/History')
 
-  // if (isFullScreenPage) {
-  //   return null
-  // }
+  if (isFullScreenPage) {
+    return null
+  }
 
   const activeTab = tabs.find((tab) => tab.route === pathname)?.name ?? 'house'
 

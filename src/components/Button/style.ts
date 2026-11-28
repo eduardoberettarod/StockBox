@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 999,
     gap: 8,
-    shadowColor: colors.white,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 3.5,

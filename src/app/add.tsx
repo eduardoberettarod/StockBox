@@ -165,7 +165,7 @@ export default function Add() {
         <View style={{ paddingBottom: 76, marginTop: 24 }}>
           <Button
             title={isEditing ? 'Atualizar' : 'Salvar'}
-            color={colors.gray[200]}
+            color={colors.orange[500]}
             textColor={colors.onyx}
             activeOpacity={0.8}
             style={{

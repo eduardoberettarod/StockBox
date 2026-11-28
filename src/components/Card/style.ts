@@ -1,4 +1,5 @@
 import { colors } from "@/theme/colors";
+import { fonts } from "@/theme/fonts";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -20,14 +21,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   productName: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 15,
     color: colors.white,
+    fontFamily: fonts.bold
   },
   quantity: {
     fontSize: 13,
-    fontWeight: '400',
     color: colors.gray[500],
+    fontFamily: fonts.regular
   },
   rightContent: {
     flexDirection: 'row',
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   price: {
     fontSize: 14,
-    fontWeight: '700',
     color: colors.gray[500],
+    fontFamily: fonts.bold
   },
 });

@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
+import { fonts } from "@/theme/fonts";
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,9 +9,6 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: colors.black,
-    paddingTop: 72,
-    paddingBottom: 16,
-    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
@@ -33,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: colors.white,
-    fontWeight: 700,
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: fonts.bold
   }
 });

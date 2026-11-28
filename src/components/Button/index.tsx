@@ -26,7 +26,7 @@ export default function Button({
     <TouchableOpacity
       style={[
         styles.container,
-        { backgroundColor: color },
+        { backgroundColor: color, shadowColor: color },
         style
       ]}
       {...rest}

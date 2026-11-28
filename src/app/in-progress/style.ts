@@ -2,9 +2,7 @@ import { StyleSheet } from "react-native";
 import { colors } from "@/theme/colors";
 
 export const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-  },
+
   image: {
     width: '100%',
     height: '100%',

@@ -11,21 +11,33 @@ export const styles = StyleSheet.create({
     padding: 36,
     gap: 20,
   },
-  title: { fontSize: 14, fontWeight: "600", color: colors.gray[100] },
-  empty: { fontSize: 13, color: colors.gray[500] },
-
-  chartArea: { alignItems: "center", justifyContent: "center", alignSelf: "stretch" },
+  title: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: colors.gray[100]
+  },
+  empty: {
+    fontSize: 13,
+    color: colors.gray[500]
+  },
+  chartArea: {
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "stretch"
+  },
   center: {
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
   },
-  // camada de brilho atrás do gráfico (shadowColor da maior fatia)
   glow: {
     ...StyleSheet.absoluteFillObject,
     shadowOffset: { width: 0, height: 0 },
   },
-  percentRow: { flexDirection: "row", alignItems: "flex-end" },
+  percentRow: {
+    flexDirection: "row",
+    alignItems: "flex-end"
+  },
   percentValue: {
     fontSize: 44,
     lineHeight: 48,
@@ -52,8 +64,11 @@ export const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontFamily: fonts.semiBold,
   },
-  centerValue: { fontSize: 12, color: colors.gray[400], fontFamily: fonts.medium },
-
+  centerValue: {
+    fontSize: 12,
+    color: colors.gray[400],
+    fontFamily: fonts.medium
+  },
   legend: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -68,8 +83,14 @@ export const styles = StyleSheet.create({
     gap: 6,
     maxWidth: "100%",
   },
-  legendItemDim: { opacity: 0.7 },
-  dot: { width: 10, height: 10, borderRadius: 5 },
+  legendItemDim: {
+    opacity: 0.7
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5
+  },
   legendLabel: {
     flexShrink: 1,
     fontSize: 12,

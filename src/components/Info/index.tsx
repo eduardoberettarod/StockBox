@@ -24,7 +24,7 @@ export default function Info({ title, subtitle, value, icon, price = false }: In
 
   return (
     <View style={styles.container}>
-      <Feather name={icon.iconName} size={24} color={icon.iconColor} />
+      <Feather name={icon.iconName} size={20} color={icon.iconColor} />
       <View>
         <Text style={styles.title}>{title}</Text>
         {!price ? (

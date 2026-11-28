@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native"
 import { colors } from "@/theme/colors"
+import { fonts } from "@/theme/fonts";
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,9 +10,9 @@ export const styles = StyleSheet.create({
   label: {
     color: colors.gray[500],
     fontSize: 13,
-    fontWeight: '600',
     paddingLeft: 4,
     letterSpacing: -0.1,
+    fontFamily: fonts.medium
   },
   inputContainer: {
     height: 50,
@@ -32,10 +33,10 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     color: colors.white,
-    fontSize: 16, // Evita o zoom automático indesejado do iOS ao focar
-    fontWeight: '400',
+    fontSize: 16,
     flex: 1,
     letterSpacing: -0.2,
     height: '100%',
+    fontFamily: fonts.regular
   }
 })
