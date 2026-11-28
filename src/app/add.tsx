@@ -13,6 +13,7 @@ import CurrencyInput from '@/components/InputCurrecy'
 import Button from '@/components/Button'
 import { router, useLocalSearchParams } from 'expo-router'
 import { useStockBoxDatabase, StockBoxResponse } from '@/database/useStockBoxDatabase'
+import Scroll from '@/components/Scroll';
 
 export default function Add() {
   const [productName, setProductName] = useState('')
@@ -48,8 +49,8 @@ export default function Add() {
   }
 
   useFocusEffect(
-    useCallback(() => { 
-      loadProduct() 
+    useCallback(() => {
+      loadProduct()
     }, [params.id])
   )
 
@@ -114,14 +115,14 @@ export default function Add() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <Scroll style={{ flex: 1 }} includeBottomInset={false}>
 
       <Header
         title={isEditing ? 'Editar Produto' : 'Novo Produto'}
       />
 
-      <ScrollView style={{ paddingHorizontal: 14, flex: 1, paddingTop: 12 }}>
-        <Banner 
+      <View style={{ flex: 1, paddingTop: 12 }}>
+        <Banner
           background={image}
         />
 
@@ -162,7 +163,7 @@ export default function Add() {
           onChangeText={setDescription}
         />
 
-        <View style={{ paddingBottom: 76, marginTop: 24 }}>
+        <View style={{ marginTop: 24 }}>
           <Button
             title={isEditing ? 'Atualizar' : 'Salvar'}
             color={colors.orange[500]}
@@ -175,8 +176,8 @@ export default function Add() {
           />
         </View>
 
-      </ScrollView>
+      </View>
 
-    </View>
+    </Scroll>
   )
 }
