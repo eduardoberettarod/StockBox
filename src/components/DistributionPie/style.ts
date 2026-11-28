@@ -16,10 +16,14 @@ export const styles = StyleSheet.create({
 
   chartArea: { alignItems: "center", justifyContent: "center", alignSelf: "stretch" },
   center: {
-    ...StyleSheet.absoluteFillObject,
     alignItems: "center",
     justifyContent: "center",
     gap: 6,
+  },
+  // camada de brilho atrás do gráfico (shadowColor da maior fatia)
+  glow: {
+    ...StyleSheet.absoluteFillObject,
+    shadowOffset: { width: 0, height: 0 },
   },
   percentRow: { flexDirection: "row", alignItems: "flex-end" },
   percentValue: {
