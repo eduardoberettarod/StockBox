@@ -11,6 +11,7 @@ type Props = {
   style?: ViewStyle;
   nav?: boolean;
   overlay?: ReactNode;
+  includeBottomInset?: boolean;
 };
 
 // Container de rolagem padrão das telas, que ajusta o espaçamento conforme as áreas seguras e a presença da barra de navegação, e evita que o teclado cubra os inputs.
@@ -19,13 +20,17 @@ export default function Scroll({
   style = {},
   nav = false,
   overlay,
+  includeBottomInset = true,
 }: Props) {
 
   const insets = useSafeAreaInsets();
+  const bottomInset = includeBottomInset ? insets.bottom : 0;
 
   const paddingBottom = nav
-    ? NAVBAR_HEIGHT + insets.bottom
-    : insets.bottom + 150;
+    ? NAVBAR_HEIGHT + bottomInset
+    : includeBottomInset
+      ? bottomInset + 150
+      : 50;
 
   return (
     <View style={{ flex: 1 }}>
