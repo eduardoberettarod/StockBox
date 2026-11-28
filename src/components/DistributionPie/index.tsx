@@ -10,7 +10,7 @@ type Props = { slices: Slice[] };
 const MAX_SIZE = 240;
 const STROKE_RATIO = 0.15; // espessura do anel em relação ao tamanho do gráfico
 const MIN_PERCENT = 1; // fatia mínima desenhada, para que valores muito pequenos continuem visíveis/clicáveis
-const DIM_ALPHA = "8C"; // ~0.55 de opacidade (hex) para as fatias não selecionadas
+const DIM_ALPHA = "73"; // ~0.45 de opacidade (hex) para as fatias não selecionadas
 const GLOW_RADIUS = 14; // alcance do brilho (shadowRadius) da maior fatia
 const GLOW_OPACITY = 0.85;
 
@@ -40,18 +40,29 @@ export default function DistributionPie({ slices }: Props) {
   // Fatia com a maior quantidade (valor): recebe o brilho (shadowColor).
   const largestIndex = slices.reduce((best, s, i) => (s.value > slices[best].value ? i : best), 0);
   const largestColor = chartColors[largestIndex];
+  const largestIsActive = largestIndex === activeIndex;
 
   // Sem espaço entre os segmentos (strokeWidth 0); fatias não selecionadas ficam esmaecidas.
   const data = slices.map((s, i) => ({
     value: Math.max(s.percent, MIN_PERCENT),
-    color: i === activeIndex ? chartColors[i] : `${chartColors[i]}${DIM_ALPHA}`,
+    color:
+      i === largestIndex && !largestIsActive
+        ? "transparent"
+        : i === activeIndex
+          ? chartColors[i]
+          : `${chartColors[i]}${DIM_ALPHA}`,
   }));
 
   // Camada atrás do gráfico só com a maior fatia visível; o shadowColor nativo
   // acompanha o formato dela e o anel principal (por cima) esconde o miolo.
   const glowData = slices.map((s, i) => ({
     value: Math.max(s.percent, MIN_PERCENT),
-    color: i === largestIndex ? largestColor : "transparent",
+    color:
+      i === largestIndex
+        ? largestIsActive
+          ? largestColor
+          : `${largestColor}${DIM_ALPHA}`
+        : "transparent",
   }));
 
   // Porcentagem real no centro: "<1" para fatias minúsculas e nunca "100" se houver outras fatias.

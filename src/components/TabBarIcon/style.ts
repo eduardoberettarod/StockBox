@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     
   },
   activeButton: {
-    backgroundColor: colors.gray[100],
-    shadowColor: colors.gray[100],
+    backgroundColor: colors.orange[400],
+    shadowColor: colors.orange[400],
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 1,
     shadowRadius: 10,
